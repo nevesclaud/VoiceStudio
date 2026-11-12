@@ -31,6 +31,9 @@ export default function AboutRosa() {
       </div>
 
       <div className="mt-8 grid gap-3">
+        <Link to="/converse-com-a-rosa" className="inline-flex min-h-12 items-center justify-center gap-2 rounded-full bg-rose-600 px-5 font-semibold text-white">
+          Converse com a Rosa: atendimentos e palestras
+        </Link>
         {links.rosaWork && (
           <a href={links.rosaWork} target="_blank" rel="noopener noreferrer" className="inline-flex min-h-12 items-center justify-center gap-2 rounded-full bg-ink px-5 font-semibold text-paper">
             Conhecer o trabalho da Rosa <ExternalLink size={16} aria-hidden />
@@ -47,7 +50,7 @@ export default function AboutRosa() {
 
       <Card className="mt-8 bg-bege-50">
         <p className="text-sm text-ink-soft">
-          Este app é um material de autocuidado e psicoeducação criado a partir do trabalho da Rosa. Ele não é atendimento, não tem chat com a Rosa e não substitui acompanhamento profissional.
+          Este app é um material de autocuidado e psicoeducação criado a partir do trabalho da Rosa. Ele não é atendimento, não tem chat com a Rosa e não substitui acompanhamento profissional. Para falar com ela, use a área Converse com a Rosa.
         </p>
         <Link to="/limites" className="mt-2 inline-block text-sm text-azul-600 underline underline-offset-2">
           Limites e cuidados do app

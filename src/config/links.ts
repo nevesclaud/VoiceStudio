@@ -8,8 +8,7 @@ export const links = {
   rosaWork: 'https://guia.rosaneves.com.br/',
   /** Quiz SOS Ansiedade existente (não é alterado pelo app). */
   quiz: 'https://guia.rosaneves.com.br/quiz/',
-  /** WhatsApp ou agenda profissional: PENDENTE, preencher apenas com link oficial. */
-  contact: '',
+  /** Contato profissional: ver src/config/contact.ts (WhatsApp confirmado). */
 }
 
 /** Contatos de ajuda no Brasil. O app não presta atendimento de emergência. */

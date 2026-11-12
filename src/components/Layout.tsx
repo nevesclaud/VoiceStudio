@@ -1,4 +1,4 @@
-import { BookHeart, Compass, Home, LifeBuoy, Sparkles, User } from 'lucide-react'
+import { BookHeart, Compass, Home, LifeBuoy, MessageCircle, Sparkles, User } from 'lucide-react'
 import { useEffect, useRef } from 'react'
 import { Link, NavLink, Outlet, useLocation } from 'react-router'
 import { useApp } from '../services/store'
@@ -78,6 +78,9 @@ export function Layout() {
         <div className="mt-6">
           <HelpButton />
         </div>
+        <NavLink to="/converse-com-a-rosa" className={({ isActive }) => `mt-4 flex min-h-12 items-center gap-3 rounded-2xl px-4 font-medium ${isActive ? 'bg-azul-50 text-ink' : 'text-muted hover:bg-bege-50 hover:text-ink'}`}>
+          <MessageCircle size={20} aria-hidden /> Converse com a Rosa
+        </NavLink>
         <p className="mt-auto text-xs text-muted">Conteúdo de autocuidado e psicoeducação. Não substitui atendimento profissional.</p>
       </aside>
 

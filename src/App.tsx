@@ -25,6 +25,7 @@ import { ErrorBoundary } from './components/ErrorBoundary'
 // Telas menos acessadas carregam sob demanda (continuam disponíveis offline após a primeira visita).
 const Integra = lazy(() => import('./pages/Integra'))
 const AboutRosa = lazy(() => import('./pages/AboutRosa'))
+const ConverseRosa = lazy(() => import('./pages/ConverseRosa'))
 const Access = lazy(() => import('./pages/Access'))
 const InfoPages = lazy(() => import('./pages/InfoPages'))
 const Speaking = lazy(() => import('./pages/speaking/Speaking'))
@@ -82,6 +83,7 @@ export function AppRoutes() {
           <Route path="/falar-em-publico/*" element={<Speaking />} />
           <Route path="/perfil" element={<Profile />} />
           <Route path="/rosa" element={<AboutRosa />} />
+          <Route path="/converse-com-a-rosa" element={<ConverseRosa />} />
           <Route path="/acesso" element={<Access />} />
           <Route path="/privacidade" element={<InfoPages page="privacidade" />} />
           <Route path="/limites" element={<InfoPages page="limites" />} />

@@ -1,4 +1,4 @@
-import { ChevronRight, Download, FileText, Heart, Info, Lock, RotateCcw, ShoppingBag, Smartphone, Trash2, UserRound } from 'lucide-react'
+import { ChevronRight, Download, MessageCircle, FileText, Heart, Info, Lock, RotateCcw, ShoppingBag, Smartphone, Trash2, UserRound } from 'lucide-react'
 import { useEffect, useState } from 'react'
 import { Link, useNavigate } from 'react-router'
 import { Monogram } from '../components/Brand'
@@ -186,6 +186,7 @@ export default function Profile() {
 
       <SectionTitle>Sobre</SectionTitle>
       <Card className="divide-y divide-line py-1">
+        <Row to="/converse-com-a-rosa" icon={MessageCircle} label="Converse com a Rosa" />
         <Row to="/rosa" icon={Info} label="Conheça a Rosa" />
         <Row to="/integra" icon={Info} label="Método INTEGRA" />
         <Row to="/trilhas" icon={Info} label="Trilhas guiadas" />

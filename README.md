@@ -23,18 +23,18 @@ ficam só no aparelho da pessoa.
 | Trilhas | 7, 14 e 21 dias. Cada dia traz texto, prática, pergunta e ação. Dá para retomar, pular dias, trocar de trilha e recomeçar. |
 | Meu progresso | Resumo, gráfico semanal ou mensal dos check-ins (só aparece a partir de 3 registros), práticas mais usadas, diário (rápido em 30 s ou completo em 5 min, com filtros), lista de check-ins. |
 | INTEGRA | Perceber, Regular e Agir. Quatro caminhos opcionais (Emoções, Corpo, Mente, Valores e sentido), com micropráticas e reflexões. Espiritualidade só aparece se a pessoa ativar. |
+| Converse com a Rosa | Apresentação com foto, galeria (ampliar e navegar por teclado), consultas presencial (São Sebastião do Paraíso, MG) e online, valores (R$ 120,00 a consulta, R$ 500,00 o acompanhamento mensal), palestras e treinamentos, perguntas frequentes. Botões de WhatsApp com mensagem pronta para cada assunto. Fica fora da ajuda imediata e das práticas. |
 | Perfil | Nome, forma de tratamento (feminino, masculino ou neutro), preferências (práticas curtas, sem respiração, menos animação, texto maior), favoritos, exportar dados, apagar tudo, instalar o app, Conheça a Rosa, Acesso, Privacidade, Limites. |
 
 ## O que depende de material ou aprovação da Rosa
 
 Lista completa em [`docs/CONTEUDO.md`](docs/CONTEUDO.md). Resumo:
 
-- **Foto**: o retrato do pacote não é publicado até ser aprovado (`photoApproved: false`). Enquanto isso, aparece o monograma RN.
+- **Fotos**: em uso por escolha da Rosa, mas o pacote avisa que são referências visuais. Confirmar semelhança e direito de uso antes de publicar. Para esconder, `photosApproved: false` em `src/config/contact.ts`.
 - **Checkout Kiwify**: o link fica em `VITE_CHECKOUT_URL`, vazio por padrão. Sem link, o cartão mostra "Em breve".
 - **Verificação de compra**: não existe backend. O app não libera conteúdo pago e não diz que uma compra foi confirmada. O material em PDF é entregue pela Kiwify.
 - **Registro profissional, formação, depoimentos**: nada foi inventado. Os campos ficam vazios em `src/config/brand.ts`.
 - **Práticas "Revisão profissional necessária"**: aguardam a leitura e validação da Rosa.
-- **Contato profissional (WhatsApp ou agenda)**: vazio em `src/config/links.ts`.
 
 ## Desenvolvimento
 
@@ -66,6 +66,7 @@ Abra o endereço mostrado (termina em `/app/`).
 | `src/config/brand.ts` | Nome, logo, foto (e se está aprovada), texto "Conheça a Rosa" |
 | `src/config/links.ts` | Instagram, página do trabalho da Rosa, contatos de emergência |
 | `src/config/commerce.ts` | Oferta (R$ 29,90, pagamento único), benefícios, checkout |
+| `src/config/contact.ts` | WhatsApp, mensagens prontas, valores das consultas, temas de palestras, perguntas frequentes, fotos |
 | `.env.local` | `VITE_CHECKOUT_URL=` (link real da Kiwify) e `VITE_BASE=` (padrão `/app/`) |
 | `public/brand/` | Arquivos de imagem. Para trocar, substitua mantendo o nome do arquivo |
 

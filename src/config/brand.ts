@@ -16,13 +16,11 @@ export const brand = {
   symbolUrl: `${base}brand/simbolo-rn.webp`,
 
   /**
-   * Foto da Rosa. PENDENTE: o retrato de referência ainda precisa de aprovação para uso público,
-   * por isso não acompanha o build. Quando houver foto autorizada:
-   * 1) coloque o arquivo em public/brand/rosa-neves.webp
-   * 2) mude photoApproved para true.
+   * Foto principal da Rosa, escolhida por ela para o app (12/11/2026).
+   * PENDENTE: confirmar semelhança e direito de uso antes de publicar (ver src/config/contact.ts).
    */
-  photoUrl: `${base}brand/rosa-neves.webp`,
-  photoApproved: false,
+  photoUrl: `${base}brand/rosa/rosa-retrato-01.webp`,
+  photoApproved: true,
   photoAlt: 'Rosa Neves',
 } as const
 

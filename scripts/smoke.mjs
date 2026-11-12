@@ -55,6 +55,8 @@ await shot('17-acesso', '/acesso')
 await shot('18-perfil', '/perfil')
 await shot('19-trilha-dia', '/trilhas/coragem/dia/1')
 await shot('20-ajuda-humana', '/ajuda/humana')
+await shot('21-converse', '/converse-com-a-rosa')
+await page.screenshot({ path: `${out}/21b-converse-full.png`, fullPage: true })
 
 // Computador
 const desk = await browser.newPage({ viewport: { width: 1280, height: 860 } })
@@ -64,6 +66,8 @@ await desk.waitForTimeout(400)
 await desk.screenshot({ path: `${out}/30-desktop-inicio.png` })
 await desk.goto(base + '/explorar/sono', { waitUntil: 'networkidle' })
 await desk.screenshot({ path: `${out}/31-desktop-categoria.png` })
+await desk.goto(base + '/converse-com-a-rosa', { waitUntil: 'networkidle' })
+await desk.screenshot({ path: `${out}/32-desktop-converse.png` })
 
 // Offline: depois da primeira visita, o app deve abrir sem rede
 await page.goto(base + '/', { waitUntil: 'networkidle' })

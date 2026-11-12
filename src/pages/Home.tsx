@@ -1,4 +1,4 @@
-import { ArrowRight, CloudSun, Heart, History, Mic, PlayCircle, Route, Sparkles, Waves } from 'lucide-react'
+import { ArrowRight, CloudSun, Heart, History, MessageCircle, Mic, PlayCircle, Route, Sparkles, Waves } from 'lucide-react'
 import { Link } from 'react-router'
 import { CheckInForm, ExerciseCard } from '../components/common'
 import { HelpButton } from '../components/Layout'
@@ -142,6 +142,17 @@ export default function Home() {
           Quando uma prática ajudar, toque no coração para encontrá-la rápido aqui.
         </EmptyState>
       )}
+
+      <Link to="/converse-com-a-rosa" className="card mt-8 flex items-center gap-3 p-4 hover:border-azul-300">
+        <span className="grid size-11 shrink-0 place-items-center rounded-full bg-azul-50 text-azul-600">
+          <MessageCircle size={20} aria-hidden />
+        </span>
+        <div className="min-w-0 flex-1">
+          <p className="font-semibold">Converse com a Rosa</p>
+          <p className="text-sm text-muted">Atendimentos presencial e online, acompanhamento e palestras.</p>
+        </div>
+        <ArrowRight size={18} className="shrink-0 text-muted" aria-hidden />
+      </Link>
 
       <SectionTitle action={<Link to="/progresso" className="text-sm font-medium text-azul-600 underline-offset-2 hover:underline">Ver tudo</Link>}>
         Últimas práticas
