@@ -8,6 +8,7 @@ import { __resetDbForTests, DB_NAME, kvSet } from '../services/db'
 import { __setRemoteForTests } from '../services/remote'
 import { defaultPrefs } from '../services/store'
 import { statsToCsv, type AdminStats } from '../pages/Painel'
+import PainelApp from '../painel/PainelApp'
 import { makeFakeRemote } from './fakeRemote'
 
 configure({ asyncUtilTimeout: 4000 })
@@ -171,10 +172,16 @@ const emptyStats: AdminStats = {
   messages: { total: 0, nova: 0, em_analise: 0, respondida: 0, arquivada: 0 },
 }
 
-describe('Painel da Rosa', () => {
-  it('sem integração, explica o que falta', async () => {
+describe('Painel da Rosa (página separada)', () => {
+  it('o app não tem mais o painel dentro dele', async () => {
     await seed()
     render(<TestApp initialPath="/painel" />)
+    expect(await screen.findByText(/agora fica em/)).toBeInTheDocument()
+    expect(screen.queryByText('Acesso da administradora')).not.toBeInTheDocument()
+  })
+
+  it('sem integração, explica o que falta', async () => {
+    render(<PainelApp />)
     expect(await screen.findByText('Integração pendente')).toBeInTheDocument()
   })
 
@@ -183,7 +190,7 @@ describe('Painel da Rosa', () => {
     const fake = makeFakeRemote({ login: { email: 'rosa@exemplo.com', password: 'certa' } })
     __setRemoteForTests(fake.client)
     const user = userEvent.setup()
-    render(<TestApp initialPath="/painel" />)
+    render(<PainelApp />)
     await user.type(await screen.findByLabelText('E-mail'), 'rosa@exemplo.com')
     await user.type(screen.getByLabelText('Senha'), 'errada')
     await user.click(screen.getByRole('button', { name: 'Entrar' }))
@@ -196,7 +203,7 @@ describe('Painel da Rosa', () => {
     const fake = makeFakeRemote({ login: { email: 'outra@exemplo.com', password: 'x' }, rpc: { is_admin: () => ({ data: false }) } })
     __setRemoteForTests(fake.client)
     const user = userEvent.setup()
-    render(<TestApp initialPath="/painel" />)
+    render(<PainelApp />)
     await user.type(await screen.findByLabelText('E-mail'), 'outra@exemplo.com')
     await user.type(screen.getByLabelText('Senha'), 'x')
     await user.click(screen.getByRole('button', { name: 'Entrar' }))
@@ -214,7 +221,7 @@ describe('Painel da Rosa', () => {
     })
     __setRemoteForTests(fake.client)
     const user = userEvent.setup()
-    render(<TestApp initialPath="/painel" />)
+    render(<PainelApp />)
     await user.type(await screen.findByLabelText('E-mail'), 'rosa@exemplo.com')
     await user.type(screen.getByLabelText('Senha'), 'certa')
     await user.click(screen.getByRole('button', { name: 'Entrar' }))

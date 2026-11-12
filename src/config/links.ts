@@ -9,6 +9,8 @@ export const links = {
   /** Quiz SOS Ansiedade existente (não é alterado pelo app). */
   quiz: 'https://guia.rosaneves.com.br/quiz/',
   /** Contato profissional: ver src/config/contact.ts (WhatsApp confirmado). */
+  /** Painel da Rosa: página separada do app, no mesmo domínio. */
+  painel: '/painel/',
 }
 
 /** Contatos de ajuda no Brasil. O app não presta atendimento de emergência. */

@@ -1,4 +1,5 @@
-import { lazy, Suspense, type ReactNode } from 'react'
+import { lazy, Suspense, useEffect, type ReactNode } from 'react'
+import { links } from './config/links'
 import { BrowserRouter, MemoryRouter, Navigate, Route, Routes } from 'react-router'
 import { FocusLayout, Layout } from './components/Layout'
 import { AppProvider, useApp } from './services/store'
@@ -27,7 +28,6 @@ const Integra = lazy(() => import('./pages/Integra'))
 const AboutRosa = lazy(() => import('./pages/AboutRosa'))
 const ConverseRosa = lazy(() => import('./pages/ConverseRosa'))
 const SuaVoz = lazy(() => import('./pages/SuaVoz'))
-const Painel = lazy(() => import('./pages/Painel'))
 const Access = lazy(() => import('./pages/Access'))
 const InfoPages = lazy(() => import('./pages/InfoPages'))
 const Speaking = lazy(() => import('./pages/speaking/Speaking'))
@@ -40,6 +40,18 @@ function Loading() {
         Carregando...
       </div>
     </div>
+  )
+}
+
+/** O painel virou uma página separada (/painel/). Endereços antigos são encaminhados. */
+function PainelMoved() {
+  useEffect(() => {
+    if (!import.meta.env.VITEST) window.location.replace(links.painel)
+  }, [])
+  return (
+    <p className="py-10 text-center text-muted">
+      O Painel da Rosa agora fica em <a className="underline" href={links.painel}>{links.painel}</a>.
+    </p>
   )
 }
 
@@ -87,7 +99,7 @@ export function AppRoutes() {
           <Route path="/rosa" element={<AboutRosa />} />
           <Route path="/converse-com-a-rosa" element={<ConverseRosa />} />
           <Route path="/sua-voz" element={<SuaVoz />} />
-          <Route path="/painel" element={<Painel />} />
+          <Route path="/painel" element={<PainelMoved />} />
           <Route path="/acesso" element={<Access />} />
           <Route path="/privacidade" element={<InfoPages page="privacidade" />} />
           <Route path="/limites" element={<InfoPages page="limites" />} />

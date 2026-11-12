@@ -55,7 +55,7 @@ Se preferir, me envie a Project URL e a chave anon (são públicas por natureza)
 **Não me envie** a senha do banco, a senha da Rosa nem a chave `service_role`.
 
 ### 6. Entrar no painel
-Abra `https://guia.rosaneves.com.br/app/painel`, entre com o e-mail e a senha criados no passo 3.
+Abra `https://guia.rosaneves.com.br/painel/` (página separada do app), entre com o e-mail e a senha criados no passo 3.
 O endereço não é secreto: a proteção é o login e as regras do banco.
 
 ## Como a segurança funciona

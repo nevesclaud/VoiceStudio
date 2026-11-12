@@ -8,6 +8,7 @@ import { exerciseById } from '../content/exercises'
 import { downloadExport } from '../services/download'
 import { RemoteDataSettings } from '../components/RemoteDataSettings'
 import { isRemoteAvailable } from '../services/remote'
+import { links } from '../config/links'
 import { useApp } from '../services/store'
 import type { TextForm } from '../types'
 
@@ -209,9 +210,9 @@ export default function Profile() {
         <p>INTEGRA | Ansiedade · versão {__APP_VERSION__}</p>
         <p>Conteúdo de autocuidado e psicoeducação. Não substitui atendimento profissional.</p>
         {isRemoteAvailable() && (
-          <Link to="/painel" className="mt-2 inline-flex min-h-10 items-center gap-1 underline underline-offset-2">
+          <a href={links.painel} className="mt-2 inline-flex min-h-10 items-center gap-1 underline underline-offset-2">
             <Lock size={12} aria-hidden /> Painel da Rosa (acesso restrito)
-          </Link>
+          </a>
         )}
       </div>
     </div>

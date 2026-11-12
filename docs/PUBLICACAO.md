@@ -39,6 +39,17 @@ O ZIP já traz o **conteúdo** da pasta `dist/`, incluindo o arquivo oculto `.ht
 3. Abra https://guia.rosaneves.com.br/ e https://guia.rosaneves.com.br/quiz/ e confirme que continuam iguais.
 4. No celular, abra o app, use o menu do navegador e escolha **Adicionar à tela inicial**.
 
+## 3b. Painel da Rosa (página separada)
+
+O `npm run release` também gera `release/integra-painel-<versão>.zip`.
+
+1. Em `guia.rosaneves.com.br/`, crie a pasta `painel` (ao lado de `app` e `quiz`).
+2. Entre em `painel`, carregue o ZIP do painel, extraia ali e apague o ZIP.
+3. Dentro de `painel` devem ficar `index.html`, `.htaccess`, `favicon.svg` e a pasta `assets`.
+4. Abra `https://guia.rosaneves.com.br/painel/` e entre com a conta da Rosa.
+
+A página não aparece no Google (noindex) e só mostra dados depois do login de administradora.
+
 ## 4. Atualizar depois
 
 Repita os passos 1 e 2 (apagando só o conteúdo de `app/`). Quem já usa o app vê o aviso

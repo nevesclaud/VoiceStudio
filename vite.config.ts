@@ -85,7 +85,46 @@ DirectoryIndex index.html
 
 const artifact = process.env.VITE_ARTIFACT === '1'
 
-export default defineConfig(artifact ? {
+const painel = process.env.VITE_TARGET === 'painel'
+
+/** .htaccess da pasta do painel: sem indexação, sem cache do index e sem abrir dentro de outros sites. */
+function htaccessPainel(): Plugin {
+  return {
+    name: 'integra-htaccess-painel',
+    apply: 'build',
+    generateBundle() {
+      this.emitFile({
+        type: 'asset',
+        fileName: '.htaccess',
+        source: `# Painel da Rosa: vale apenas para /painel/
+Options -Indexes
+DirectoryIndex index.html
+
+<IfModule mod_headers.c>
+  Header always set X-Robots-Tag "noindex, nofollow"
+  Header always set X-Content-Type-Options "nosniff"
+  Header always set Referrer-Policy "no-referrer"
+  Header always set X-Frame-Options "DENY"
+  Header always set Permissions-Policy "camera=(), geolocation=(), microphone=()"
+  Header always set Content-Security-Policy "default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; font-src 'self'; connect-src 'self'${supabaseOrigin ? ' ' + supabaseOrigin : ''}; frame-ancestors 'none'; base-uri 'self'; form-action 'self'"
+  <FilesMatch "^index\\.html$">
+    Header set Cache-Control "no-cache, must-revalidate"
+  </FilesMatch>
+</IfModule>
+`,
+      })
+    },
+  }
+}
+
+export default defineConfig(painel ? {
+  // Painel da Rosa, página separada em /painel/ (scripts/build-painel.mjs). Sem PWA.
+  base: '/painel/',
+  define: { __APP_VERSION__: JSON.stringify(pkg.version) },
+  plugins: [react(), tailwindcss(), htaccessPainel()],
+  publicDir: false,
+  build: { outDir: 'dist-painel', emptyOutDir: true, rollupOptions: { input: 'painel.html' } },
+} : artifact ? {
   // Pré-visualização em arquivo único (scripts/build-artifact.mjs). Sem service worker.
   base: './',
   define: { __APP_VERSION__: JSON.stringify(pkg.version) },

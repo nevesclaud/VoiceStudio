@@ -8,7 +8,11 @@ if (!existsSync('dist/index.html')) {
   process.exit(1)
 }
 mkdirSync('release', { recursive: true })
-const out = `release/integra-app-${pkg.version}.zip`
-rmSync(out, { force: true })
-execFileSync('zip', ['-r', '-X', `../${out}`, '.'], { cwd: 'dist', stdio: 'inherit' })
-console.log(`\nPronto: ${out}`)
+function pack(dir, name) {
+  const out = `release/${name}-${pkg.version}.zip`
+  rmSync(out, { force: true })
+  execFileSync('zip', ['-r', '-X', '-q', `../${out}`, '.'], { cwd: dir, stdio: 'inherit' })
+  console.log(`Pronto: ${out}  (conteúdo de ${dir}/)`)
+}
+pack('dist', 'integra-app') // vai em guia.rosaneves.com.br/app/
+if (existsSync('dist-painel/index.html')) pack('dist-painel', 'integra-painel') // vai em guia.rosaneves.com.br/painel/
