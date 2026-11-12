@@ -1,0 +1,121 @@
+import type { Journey } from '../types'
+
+/**
+ * Trilhas guiadas. Sem obrigação de fazer todos os dias, sem promessa de resultado em X dias.
+ * Cada dia: texto curto, uma prática de 2 a 8 minutos, uma pergunta e uma ação simples.
+ */
+export const journeys: Journey[] = [
+  {
+    id: 'comecando',
+    title: 'Começando a me entender',
+    days: 7,
+    focus: 'Perceber',
+    description: 'Uma semana para observar como a ansiedade aparece em você: no corpo, nos pensamentos e nas atitudes. Sem pressa e sem cobrança.',
+    plan: [
+      {
+        title: 'O que é ansiedade, afinal?',
+        text: 'Ansiedade é uma reação de alerta do organismo. Ela tenta proteger você de um perigo, mesmo quando o perigo é só uma possibilidade. Senti-la não é fraqueza.',
+        exerciseId: 'pontos-apoio',
+        question: 'Em que situações você percebe que fica em alerta?',
+        action: 'Faça um check-in no app em dois momentos diferentes do dia.',
+      },
+      {
+        title: 'O que o corpo avisa',
+        text: 'Antes de você nomear a ansiedade, o corpo pode dar sinais: ombros tensos, estômago apertado, coração mais rápido. Hoje é dia de observar, não de mudar.',
+        exerciseId: 'relaxamento-muscular',
+        question: 'Qual parte do seu corpo costuma dar o primeiro sinal?',
+        action: 'Três vezes hoje, pare e perceba os ombros e a mandíbula.',
+      },
+      {
+        title: 'O que a mente diz',
+        text: 'Pensamentos ansiosos costumam começar com "e se". Eles falam do futuro como se já tivesse acontecido. Perceber isso já cria um pouco de espaço.',
+        exerciseId: 'observar-pensamentos',
+        question: 'Qual "e se" apareceu mais vezes hoje?',
+        action: 'Anote no diário um pensamento que se repetiu.',
+      },
+      {
+        title: 'O que você faz quando ela vem',
+        text: 'Às vezes a gente evita, adia, controla demais ou fica no celular. São tentativas de aliviar. Entender o que você faz ajuda a escolher outras saídas.',
+        exerciseId: 'registro-pensamentos',
+        question: 'O que você costuma fazer quando a ansiedade sobe?',
+        action: 'Faça uma entrada rápida no diário sobre um momento de hoje.',
+      },
+      {
+        title: 'Seus gatilhos',
+        text: 'Lugares, horários, pessoas, cansaço e fome podem influenciar. Não é para evitar tudo, é para se preparar melhor.',
+        exerciseId: 'gatilhos',
+        question: 'Que padrão você começa a perceber nos seus dias?',
+        action: 'Observe se sono, café ou fome influenciaram seu dia.',
+      },
+      {
+        title: 'O que já ajuda',
+        text: 'Você já tem recursos, mesmo que não perceba. Uma conversa, uma caminhada, uma música. Hoje é dia de lembrar deles.',
+        exerciseId: 'mapa-apoio',
+        question: 'O que já ajudou você em outros momentos difíceis?',
+        action: 'Salve uma prática do app nos favoritos.',
+      },
+      {
+        title: 'Olhando a semana',
+        text: 'Não importa quantos dias você fez. O que importa é o que você percebeu. Isso é conhecimento sobre você.',
+        exerciseId: 'autocompaixao',
+        question: 'O que mudou, mesmo que um pouquinho, na forma como você se observa?',
+        action: 'Escolha uma prática para manter na próxima semana.',
+      },
+    ],
+  },
+  {
+    id: 'mais-calma',
+    title: 'Mais calma no cotidiano',
+    days: 14,
+    focus: 'Regular',
+    description: 'Duas semanas de práticas curtas para incluir no dia a dia: pausas, sono, foco e gentileza consigo. Você escolhe o ritmo.',
+    plan: [
+      { title: 'Um minuto conta', text: 'Não é preciso uma hora livre para se cuidar. Pequenas pausas repetidas costumam ser mais possíveis do que grandes mudanças.', exerciseId: 'suspiro-fisiologico', question: 'Em que momento do seu dia cabe uma pausa de um minuto?', action: 'Coloque um lembrete para uma pausa amanhã.' },
+      { title: 'Pés no chão', text: 'Quando a cabeça acelera, o corpo pode ser uma âncora. Os pés no chão estão sempre disponíveis.', exerciseId: 'pontos-apoio', question: 'Como foi perceber os apoios do corpo?', action: 'Repita a prática em pé, numa fila ou esperando algo.' },
+      { title: 'Ritmo tranquilo', text: 'Uma saída de ar mais longa que a entrada pode ajudar o corpo a desacelerar. Se contar incomodar, não conte.', exerciseId: 'respiracao-cadenciada', question: 'Qual ritmo foi confortável para você?', action: 'Use a respiração cadenciada antes de dormir.' },
+      { title: 'Soltar a mandíbula', text: 'Muita tensão fica guardada no rosto. Soltar a mandíbula é uma pausa discreta que você pode fazer em qualquer lugar.', exerciseId: 'mandibula', question: 'Você percebeu os dentes encostados hoje?', action: 'Cole um lembrete perto do computador ou da pia.' },
+      { title: 'Uma coisa de cada vez', text: 'Fazer várias coisas ao mesmo tempo aumenta a sensação de urgência. Hoje, experimente dar atenção a uma tarefa só.', exerciseId: 'uma-tarefa', question: 'Como foi fazer uma coisa só?', action: 'Faça uma refeição sem tela.' },
+      { title: 'Hora de se preocupar', text: 'Dar um horário para as preocupações pode diminuir o tempo que elas ocupam no resto do dia.', exerciseId: 'tempo-preocupacao', question: 'As preocupações ainda pareciam urgentes no horário marcado?', action: 'Anote as preocupações e adie para o horário escolhido.' },
+      { title: 'Uma semana de pausas', text: 'Metade do caminho. Não precisa ter feito todos os dias. O que você notou?', exerciseId: 'observar-pensamentos', question: 'Qual prática combinou mais com você até aqui?', action: 'Salve sua prática preferida nos favoritos.' },
+      { title: 'Prioridades possíveis', text: 'Nem tudo é urgente, mesmo quando parece. Escolher o que fica para depois também é cuidado.', exerciseId: 'prioridades', question: 'O que você decidiu deixar para depois?', action: 'Escolha três prioridades para amanhã.' },
+      { title: 'Movimento leve', text: 'O corpo em alerta tem energia acumulada. Movimentos simples podem ajudar a gastar um pouco dela, respeitando seus limites.', exerciseId: 'movimento-leve', question: 'Como está a energia do corpo depois do movimento?', action: 'Caminhe 10 minutos, se for possível para você.' },
+      { title: 'Noite mais leve', text: 'A forma como o dia termina influencia o descanso. Uma transição curta pode ajudar a mente a desligar aos poucos.', exerciseId: 'preparacao-sono', question: 'O que ajudou você a desacelerar à noite?', action: 'Faça a descarga de pendências no papel antes de deitar.' },
+      { title: 'Fatos ou hipóteses?', text: 'A mente ansiosa costuma preencher lacunas com o pior cenário. Separar fatos de suposições traz clareza.', exerciseId: 'fatos-hipoteses', question: 'Que suposição você percebeu hoje?', action: 'Antes de concluir algo, pense em outra explicação possível.' },
+      { title: 'Ampliar o olhar', text: 'Quando tudo se estreita, ampliar o campo de visão pode ajudar a sair do foco único.', exerciseId: 'visao-periferica', question: 'Como foi perceber as laterais do campo de visão?', action: 'Faça a prática olhando por uma janela.' },
+      { title: 'Gentileza consigo', text: 'Cobrança constante cansa. Hoje é dia de falar consigo como falaria com alguém querido.', exerciseId: 'autocompaixao', question: 'Que frase gentil você conseguiu dizer a si?', action: 'Escreva essa frase onde possa ver.' },
+      { title: 'Seu jeito de se cuidar', text: 'Você experimentou várias práticas. Algumas ajudaram, outras não, e tudo bem. Agora você conhece melhor o que combina com você.', exerciseId: 'grounding', question: 'Quais práticas você quer manter?', action: 'Monte sua lista de três práticas preferidas.' },
+    ],
+  },
+  {
+    id: 'coragem',
+    title: 'Coragem para situações difíceis',
+    days: 21,
+    focus: 'Agir',
+    description: 'Três semanas para se aproximar, aos poucos e por escolha, de situações que a ansiedade vem fazendo você evitar. Coragem aqui é agir com medo por perto, no seu ritmo.',
+    plan: [
+      { title: 'O que você tem evitado?', text: 'Evitar alivia na hora, mas pode ir diminuindo o espaço da vida. Hoje é só para olhar com honestidade, sem obrigação de mudar nada.', exerciseId: 'gatilhos', question: 'Que situação você gostaria de voltar a fazer, ou fazer pela primeira vez?', action: 'Escreva essa situação no diário.' },
+      { title: 'Por que isso importa?', text: 'Coragem fica mais fácil quando sabemos para que estamos fazendo algo. O motivo é seu, não de outra pessoa.', exerciseId: 'autocompaixao', question: 'O que ficaria possível se essa situação pesasse menos?', action: 'Escreva uma frase sobre o que é importante para você.' },
+      { title: 'Degraus', text: 'Ninguém precisa começar pelo mais difícil. Dividir em degraus torna o caminho possível.', exerciseId: 'passos-pequenos', question: 'Qual é o degrau mais fácil da sua lista?', action: 'Monte sua lista com 4 a 6 degraus.' },
+      { title: 'Seu kit de apoio', text: 'Antes de subir um degrau, tenha à mão algo que ajude no desconforto: uma prática, uma frase, uma pessoa.', exerciseId: 'pontos-apoio', question: 'O que vai no seu kit de apoio?', action: 'Salve suas práticas de apoio nos favoritos.' },
+      { title: 'Previsões', text: 'Antes de agir, a mente costuma prever o pior. Anotar a previsão permite comparar depois com o que aconteceu.', exerciseId: 'questionar-previsoes', question: 'O que sua mente prevê que vai acontecer no primeiro degrau?', action: 'Anote a previsão e quanto você acredita nela, de 0 a 100.' },
+      { title: 'Primeiro degrau', text: 'Hoje, se fizer sentido, tente o primeiro degrau. Se não for hoje, tudo bem. Você pode escolher outro dia.', exerciseId: 'suspiro-fisiologico', question: 'Como foi tentar? Ou o que impediu hoje?', action: 'Tente o primeiro degrau ou marque um dia para ele.' },
+      { title: 'Comparar previsão e realidade', text: 'O que você previu e o que aconteceu de fato? Às vezes acerta, muitas vezes não. As duas coisas ensinam.', exerciseId: 'registro-pensamentos', question: 'O que aconteceu de diferente do que você imaginava?', action: 'Registre no diário a previsão e o resultado.' },
+      { title: 'Repetir também é avançar', text: 'Repetir o mesmo degrau várias vezes ajuda o corpo a se acostumar. Não é ficar para trás.', exerciseId: 'pontos-apoio', question: 'Como está o desconforto ao repetir?', action: 'Repita o primeiro degrau ou tente de novo.' },
+      { title: 'Quando dá vontade de desistir', text: 'Vontade de desistir faz parte. Você pode diminuir o degrau em vez de abandonar o caminho.', exerciseId: 'distanciamento', question: 'O que a vontade de desistir está dizendo?', action: 'Se precisar, crie um degrau intermediário mais fácil.' },
+      { title: 'Corpo em movimento', text: 'Antes de uma situação difícil, movimentos leves podem ajudar a gastar um pouco da energia do alerta.', exerciseId: 'movimento-leve', question: 'Como o corpo reagiu ao movimento antes do desafio?', action: 'Use o movimento leve antes do próximo degrau.' },
+      { title: 'Segundo degrau', text: 'Quando o primeiro degrau ficar um pouco mais leve, você pode subir. Ou ficar mais tempo nele. Você decide.', exerciseId: 'respiracao-cadenciada', question: 'Você sente que está [[pronta|pronto|com disposição]] para o próximo degrau?', action: 'Tente o segundo degrau ou repita o primeiro.' },
+      { title: 'E se der errado?', text: 'Se algo sair diferente do planejado, o que você poderia fazer? Pensar nisso com calma costuma diminuir o medo.', exerciseId: 'e-dai-se', question: 'Que recurso seu apareceu quando seguiu a história até o fim?', action: 'Escreva: "Se acontecer, eu posso..."' },
+      { title: 'Reconhecer o caminho', text: 'Olhe para trás: quantas vezes você se aproximou do que evitava? Cada tentativa conta, inclusive as incompletas.', exerciseId: 'autocompaixao', question: 'O que você fez nessas semanas que merece reconhecimento?', action: 'Escreva três tentativas que você fez.' },
+      { title: 'Atenção para fora', text: 'Durante uma situação difícil, a atenção costuma se voltar para dentro. Trazer o foco para o ambiente e para as pessoas ajuda.', exerciseId: 'grounding', question: 'O que você percebeu do ambiente quando olhou para fora?', action: 'No próximo degrau, preste atenção em três detalhes ao redor.' },
+      { title: 'Terceiro degrau', text: 'Continue no seu ritmo. Subir, descer e repetir fazem parte. Não existe caminho perfeito.', exerciseId: 'pontos-apoio', question: 'O que você aprendeu sobre seu ritmo?', action: 'Tente o terceiro degrau ou repita um anterior.' },
+      { title: 'Medo de julgamento', text: 'Muitas vezes, o medo é do que os outros vão pensar. Separar fatos de hipóteses ajuda a dar o tamanho certo a isso.', exerciseId: 'fatos-hipoteses', question: 'O que você supôs que os outros pensaram? O que foi fato?', action: 'Após o próximo degrau, liste só os fatos.' },
+      { title: 'Gentileza nos dias difíceis', text: 'Haverá dias em que não dá. Isso não apaga o caminho. Descansar também faz parte da coragem.', exerciseId: 'relaxamento-muscular', question: 'Como você pode cuidar de si num dia difícil?', action: 'Faça uma pausa de cuidado sem culpa.' },
+      { title: 'Pedir apoio', text: 'Coragem não precisa ser solitária. Contar para alguém o que você está tentando pode ajudar.', exerciseId: 'mapa-apoio', question: 'Com quem você poderia compartilhar esse caminho?', action: 'Conte para alguém de confiança sobre um degrau que você subiu.' },
+      { title: 'Um degrau maior', text: 'Se fizer sentido, tente um degrau mais alto da lista. Se não, continue onde está. As duas escolhas são válidas.', exerciseId: 'suspiro-fisiologico', question: 'Como foi sentir medo e agir mesmo assim, ou escolher esperar?', action: 'Escolha o próximo degrau e quando.' },
+      { title: 'O que mudou?', text: 'Compare como você se sentia no começo da trilha e agora. Pode ser pouco, pode ser muito, pode ser diferente do esperado.', exerciseId: 'registro-pensamentos', question: 'O que mudou, mesmo que um pouquinho?', action: 'Releia suas anotações do primeiro dia.' },
+      { title: 'Seguir daqui', text: 'A trilha termina, o caminho continua. Você pode recomeçar, escolher outra situação ou manter os degraus que fazem sentido.', exerciseId: 'passos-pequenos', question: 'Qual é o próximo passo que você quer dar?', action: 'Escreva seu próximo degrau e guarde no diário.' },
+    ],
+  },
+]
+
+export const journeyById = (id: string): Journey | undefined => journeys.find((j) => j.id === id)

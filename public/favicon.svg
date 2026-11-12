@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-label="INTEGRA">
+  <rect width="512" height="512" rx="112" fill="#123F4F"/>
+  <path d="M118 398Q256 468 394 398" fill="none" stroke="#9DB8A2" stroke-width="18" stroke-linecap="round" opacity=".9"/>
+  <g fill="#FAF7F2" transform="translate(0 -14)">
+    <rect x="150" y="168" width="34" height="184" rx="8"/>
+    <path d="M226 352V168h30l92 128V168h34v184h-30l-92-128v128z"/>
+  </g>
+  <circle cx="404" cy="140" r="16" fill="#D9A79A"/>
+</svg>
