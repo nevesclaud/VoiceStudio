@@ -208,6 +208,11 @@ export default function Profile() {
         <Monogram className="h-8 opacity-80" />
         <p>INTEGRA | Ansiedade · versão {__APP_VERSION__}</p>
         <p>Conteúdo de autocuidado e psicoeducação. Não substitui atendimento profissional.</p>
+        {isRemoteAvailable() && (
+          <Link to="/painel" className="mt-2 inline-flex min-h-10 items-center gap-1 underline underline-offset-2">
+            <Lock size={12} aria-hidden /> Painel da Rosa (acesso restrito)
+          </Link>
+        )}
       </div>
     </div>
   )
