@@ -1,5 +1,5 @@
 /**
- * Oferta do material SOS Ansiedade.
+ * Oferta do material "Ansiedade: Mente, Corpo e Respiração" (antes chamado SOS Ansiedade).
  *
  * Situação atual: INTEGRAÇÃO PENDENTE.
  * - O link do checkout vem de VITE_CHECKOUT_URL (arquivo .env.local no build). Vazio por padrão.
@@ -20,7 +20,7 @@ function validCheckout(url: string): string {
 }
 
 export const offer = {
-  title: 'Material SOS Ansiedade',
+  title: 'Ansiedade: Mente, Corpo e Respiração',
   format: 'Material digital em PDF',
   price: 'R$ 29,90',
   priceNote: 'Pagamento único',

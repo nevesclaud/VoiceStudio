@@ -73,7 +73,7 @@ export default function Practice() {
 
       <div className="mt-5">
         <Notice>
-          Práticas marcadas com <strong>Revisão profissional necessária</strong> vêm do material SOS Ansiedade ou têm evidência incerta e aguardam validação da Rosa. Experimente com cuidado.
+          Práticas marcadas com <strong>Revisão profissional necessária</strong> vêm do material de referência ou têm evidência incerta e aguardam validação da Rosa. Experimente com cuidado.
         </Notice>
       </div>
 

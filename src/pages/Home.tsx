@@ -40,7 +40,7 @@ export default function Home() {
       {prefs.onboarding === 'ignorado' && (
         <Card className="mt-4 bg-gradient-to-br from-white to-rose-50">
           <p className="font-semibold">Quer sugestões feitas para você?</p>
-          <p className="mt-1 text-sm text-muted">Algumas perguntas rápidas, baseadas no SOS Ansiedade. Uns 3 minutos.</p>
+          <p className="mt-1 text-sm text-muted">Algumas perguntas rápidas sobre como a ansiedade aparece em você. Uns 3 minutos.</p>
           <ButtonLink to="/primeiros-passos" size="sm" className="mt-3">
             Responder agora
           </ButtonLink>

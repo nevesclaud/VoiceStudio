@@ -34,6 +34,7 @@ Texto de "Conheça a Rosa": o texto-base da própria base de conhecimento, sem a
 | Logo definitiva | Monograma RN do pacote, com fundo removido | `public/brand/monograma-rn.webp` e `simbolo-rn.webp` |
 | Registro profissional, formação | Não exibidos | `src/config/brand.ts` (`rosaProfile.pending`) |
 | Link do checkout Kiwify | Vazio → "Em breve" | `.env.local` (`VITE_CHECKOUT_URL`) |
+| Nome do material | "Ansiedade: Mente, Corpo e Respiração" (escolhido em 12/11/2026). O quiz publicado continua como SOS Ansiedade | `src/config/commerce.ts` |
 | O que o material de R$ 29,90 entrega | Benefícios copiados da oferta já publicada no quiz. Confirmar se correspondem à entrega real (8 ou 12 técnicas, bônus) | `src/config/commerce.ts` |
 | Verificação de compra / área paga no app | Não existe. Precisa de backend com login e confirmação da Kiwify (webhook) | Ver `docs/ARQUITETURA.md` |
 | Contato profissional (WhatsApp, agenda) | Vazio, botão não aparece | `src/config/links.ts` |
