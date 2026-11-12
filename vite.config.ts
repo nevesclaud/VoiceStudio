@@ -136,6 +136,8 @@ export default defineConfig(artifact ? {
     environment: 'jsdom',
     globals: true,
     setupFiles: ['./src/test/setup.ts'],
+    // Os testes nunca usam o Supabase real (nem o .env.local): a integração é simulada caso a caso.
+    env: { VITE_SUPABASE_URL: '', VITE_SUPABASE_ANON_KEY: '', VITE_CHECKOUT_URL: '' },
     css: false,
   },
 })

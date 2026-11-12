@@ -2,7 +2,8 @@
 // Uso: npm run build:preview
 import { execSync } from 'node:child_process'
 import { readFileSync, writeFileSync, readdirSync } from 'node:fs'
-execSync('vite build', { stdio: 'inherit', env: { ...process.env, VITE_ARTIFACT: '1' } })
+// A pré-visualização no claude.ai não pode acessar o Supabase: gera sem a integração.
+execSync('vite build', { stdio: 'inherit', env: { ...process.env, VITE_ARTIFACT: '1', VITE_SUPABASE_URL: '', VITE_SUPABASE_ANON_KEY: '' } })
 const dir = 'dist-artifact'
 let html = readFileSync(`${dir}/artifact.html`, 'utf8')
 const js = readdirSync(`${dir}/assets`).find((f) => f.endsWith('.js'))
