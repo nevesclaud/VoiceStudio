@@ -72,6 +72,17 @@ Outras proteções:
 - Anti-spam: campo-armadilha, tempo mínimo de preenchimento, limites por aparelho (3 mensagens/hora, 10/dia), por IP (6/hora, guardado só como hash) e geral (120/hora).
 - Nenhum IP, nome ou e-mail nas estatísticas. Nome e e-mail só nas mensagens, e só se a pessoa preencher.
 
+## Atualizações do banco
+
+Cada mudança vira um arquivo novo em `supabase/migrations/` (nunca se altera um arquivo já aplicado).
+Antes de aplicar, rode `npm run test:db`. Para aplicar: cole o arquivo no SQL Editor e clique em Run,
+ou peça ao Claude com o conector do Supabase ativo (ele mostra a mudança e aplica só com autorização).
+
+| Arquivo | Aplicado no projeto |
+| --- | --- |
+| `20261112120000_integra_painel.sql` | 12/11/2026 (SQL Editor) |
+| `20261112160000_admins_policy_initplan.sql` | 12/11/2026 (conector) |
+
 ## Testes
 
 ```bash
