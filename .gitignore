@@ -4,3 +4,4 @@ dev-dist
 release
 *.tsbuildinfo
 .env.local
+dist-artifact

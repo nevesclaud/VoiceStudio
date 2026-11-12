@@ -74,7 +74,20 @@ DirectoryIndex index.html
   }
 }
 
-export default defineConfig({
+const artifact = process.env.VITE_ARTIFACT === '1'
+
+export default defineConfig(artifact ? {
+  // Pré-visualização em arquivo único (scripts/build-artifact.mjs). Sem service worker.
+  base: './',
+  define: { __APP_VERSION__: JSON.stringify(pkg.version) },
+  plugins: [react(), tailwindcss()],
+  build: {
+    outDir: 'dist-artifact',
+    assetsInlineLimit: 100_000_000,
+    cssCodeSplit: false,
+    rollupOptions: { input: 'artifact.html', output: { inlineDynamicImports: true } },
+  },
+} : {
   base,
   define: { __APP_VERSION__: JSON.stringify(pkg.version) },
   plugins: [

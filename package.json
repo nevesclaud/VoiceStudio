@@ -12,6 +12,7 @@
     "typecheck": "tsc -b --noEmit",
     "test": "vitest run",
     "zip": "node scripts/make-zip.mjs",
+    "build:preview": "node scripts/build-artifact.mjs",
     "release": "npm run lint && npm run typecheck && npm run test && npm run build && npm run zip"
   },
   "dependencies": {

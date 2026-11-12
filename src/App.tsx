@@ -96,9 +96,16 @@ export default function App() {
   return (
     <ErrorBoundary>
       <AppProvider>
-        <BrowserRouter basename={import.meta.env.BASE_URL.replace(/\/$/, '')}>
-          <AppRoutes />
-        </BrowserRouter>
+        {import.meta.env.VITE_ARTIFACT ? (
+          // Pré-visualização em página única: a navegação fica na memória (sem mudar o endereço).
+          <MemoryRouter>
+            <AppRoutes />
+          </MemoryRouter>
+        ) : (
+          <BrowserRouter basename={import.meta.env.BASE_URL.replace(/\/$/, '')}>
+            <AppRoutes />
+          </BrowserRouter>
+        )}
       </AppProvider>
     </ErrorBoundary>
   )
