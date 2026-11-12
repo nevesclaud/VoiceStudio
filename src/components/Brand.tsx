@@ -7,7 +7,7 @@ export function Wordmark({ size = 'md', signature = true }: { size?: 'sm' | 'md'
   return (
     <span className="inline-flex flex-col leading-none">
       <span className="sr-only">{`${brand.appName}, por ${brand.signature}`}</span>
-      <span className={`font-display font-bold whitespace-nowrap text-ink ${big ? 'text-4xl tracking-[0.14em]' : size === 'sm' ? 'text-[1.05rem] tracking-[0.12em]' : 'text-2xl tracking-[0.16em]'}`} aria-hidden>
+      <span className={`font-display font-bold text-ink ${big ? 'text-[1.9rem] tracking-[0.1em] sm:text-4xl sm:tracking-[0.14em]' : size === 'sm' ? 'whitespace-nowrap text-[1.05rem] tracking-[0.12em]' : 'whitespace-nowrap text-2xl tracking-[0.16em]'}`} aria-hidden>
         INTEGRA<span className="font-semibold tracking-normal text-rose-600"> | </span>
         <span className="font-semibold tracking-[0.04em]">Ansiedade</span>
       </span>

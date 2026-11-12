@@ -121,7 +121,7 @@ describe('práticas', () => {
     render(<TestApp initialPath="/praticar/registro-pensamentos/iniciar" />)
     for (let i = 0; i < 6; i++) await user.click(await screen.findByRole('button', { name: /^(Próximo|Concluir)$/ }))
     expect(await screen.findByText('Prática concluída.')).toBeInTheDocument()
-    await user.click(screen.getByRole('button', { name: 'Ajudou' }))
+    await user.click(screen.getByRole('button', { name: 'Sim, me ajudou' }))
     await user.click(screen.getByRole('button', { name: 'Salvar e continuar' }))
     await waitFor(async () => expect((await listAll('sessions'))[0]).toMatchObject({ exerciseId: 'registro-pensamentos', status: 'concluida', usefulness: 'ajudou' }))
   })

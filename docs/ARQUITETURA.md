@@ -28,6 +28,13 @@ src/
   test/        testes de conteúdo, lógica, contraste e fluxos
 ```
 
+## Dados remotos (opcionais)
+
+- Supabase (Postgres + Auth), configurado por `VITE_SUPABASE_URL` e `VITE_SUPABASE_ANON_KEY`. Sem eles, nada é enviado.
+- Escrita pública só por funções validadoras (`log_events`, `submit_message`, `submit_exercise_feedback`, `share_quiz`, `delete_my_data`). Leitura só para administradoras (RLS + `public.admins`). Estatísticas só agregadas (`admin_stats`).
+- Estatísticas desligadas por padrão; consentimento em Boas-vindas, no Início (uma vez) e em Perfil.
+- Detalhes e testes: `docs/SUPABASE.md`, `supabase/`.
+
 ## Dados (local-first)
 
 - Banco IndexedDB `integra-ansiedade`: `kv` (preferências, trilhas, anotações, área de falar, retomada), `checkins`, `journal`, `sessions`, `recordings`.

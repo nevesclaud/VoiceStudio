@@ -1,4 +1,4 @@
-import { ChevronRight, Download, MessageCircle, FileText, Heart, Info, Lock, RotateCcw, ShoppingBag, Smartphone, Trash2, UserRound } from 'lucide-react'
+import { ChevronRight, Download, MessageCircle, MessageSquareHeart, FileText, Heart, Info, Lock, RotateCcw, ShoppingBag, Smartphone, Trash2, UserRound } from 'lucide-react'
 import { useEffect, useState } from 'react'
 import { Link, useNavigate } from 'react-router'
 import { Monogram } from '../components/Brand'
@@ -6,6 +6,8 @@ import { Button, Card, ChoiceList, PageHeader, SectionTitle, TextInput, Toggle }
 import { categoryById } from '../content/categories'
 import { exerciseById } from '../content/exercises'
 import { downloadExport } from '../services/download'
+import { RemoteDataSettings } from '../components/RemoteDataSettings'
+import { isRemoteAvailable } from '../services/remote'
 import { useApp } from '../services/store'
 import type { TextForm } from '../types'
 
@@ -114,7 +116,7 @@ export default function Profile() {
         <div className="flex gap-3">
           <Lock size={20} className="mt-0.5 shrink-0 text-salvia-700" aria-hidden />
           <p className="text-sm text-ink-soft">
-            Tudo fica neste aparelho: {journal.length} registros no diário, {checkins.length} check-ins e {sessions.length} práticas. Nada é enviado para servidores.{' '}
+            Neste aparelho: {journal.length} registros no diário, {checkins.length} check-ins e {sessions.length} práticas. Esses registros nunca são enviados para servidores.{' '}
             <Link to="/privacidade" className="underline underline-offset-2">
               Como funciona
             </Link>
@@ -139,7 +141,7 @@ export default function Profile() {
         </div>
         <div className="mt-6 rounded-2xl border border-rose-100 bg-rose-50 p-4">
           <p className="font-semibold text-rose-700">Apagar todos os meus dados</p>
-          <p className="mt-1 text-sm text-ink-soft">Remove diário, check-ins, práticas, gravações e preferências deste aparelho. Não dá para desfazer.</p>
+          <p className="mt-1 text-sm text-ink-soft">Remove diário, check-ins, práticas, gravações e preferências deste aparelho. Não dá para desfazer.{isRemoteAvailable() ? ' Para apagar também o que foi enviado à Rosa, use "Apagar dados enviados" acima, antes.' : ''}</p>
           <label htmlFor="confirmar" className="label mt-3">
             Para confirmar, digite APAGAR
           </label>
@@ -166,6 +168,13 @@ export default function Profile() {
         )}
       </Card>
 
+      {isRemoteAvailable() && (
+        <>
+          <SectionTitle>Compartilhamento com a Rosa</SectionTitle>
+          <RemoteDataSettings />
+        </>
+      )}
+
       <SectionTitle>Instalar o app</SectionTitle>
       <Card>
         <div className="flex gap-3">
@@ -188,6 +197,7 @@ export default function Profile() {
       <Card className="divide-y divide-line py-1">
         <Row to="/converse-com-a-rosa" icon={MessageCircle} label="Converse com a Rosa" />
         <Row to="/rosa" icon={Info} label="Conheça a Rosa" />
+        <Row to="/sua-voz" icon={MessageSquareHeart} label="Sua voz importa" />
         <Row to="/integra" icon={Info} label="Método INTEGRA" />
         <Row to="/trilhas" icon={Info} label="Trilhas guiadas" />
         <Row to="/acesso" icon={ShoppingBag} label="Acesso e materiais" />

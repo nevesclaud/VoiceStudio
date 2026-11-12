@@ -1,5 +1,5 @@
 /// <reference types="vitest/config" />
-import { defineConfig } from 'vite'
+import { defineConfig, loadEnv } from 'vite'
 import react from '@vitejs/plugin-react'
 import tailwindcss from '@tailwindcss/vite'
 import { VitePWA } from 'vite-plugin-pwa'
@@ -9,6 +9,15 @@ import type { Plugin } from 'vite'
 // O app é publicado em https://guia.rosaneves.com.br/app/
 // Para outro caminho, defina VITE_BASE (ex.: VITE_BASE=/ npm run build).
 const base = process.env.VITE_BASE ?? '/app/'
+// Origem do Supabase (se configurado) liberada na CSP; nenhum outro servidor recebe conexões do app.
+const supabaseOrigin = (() => {
+  try {
+    const env = { ...loadEnv('production', process.cwd(), 'VITE_'), ...process.env }
+    return new URL(env.VITE_SUPABASE_URL ?? '').origin
+  } catch {
+    return ''
+  }
+})()
 const pkg = JSON.parse(readFileSync(new URL('./package.json', import.meta.url), 'utf8')) as { version: string }
 
 /**
@@ -48,7 +57,7 @@ DirectoryIndex index.html
   Header always set Referrer-Policy "strict-origin-when-cross-origin"
   Header always set X-Frame-Options "SAMEORIGIN"
   Header always set Permissions-Policy "camera=(), geolocation=(), microphone=(self)"
-  Header always set Content-Security-Policy "default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; media-src 'self' blob:; font-src 'self'; connect-src 'self'; manifest-src 'self'; worker-src 'self'; frame-ancestors 'self'; base-uri 'self'; form-action 'self'"
+  Header always set Content-Security-Policy "default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; media-src 'self' blob:; font-src 'self'; connect-src 'self'${supabaseOrigin ? ' ' + supabaseOrigin : ''}; manifest-src 'self'; worker-src 'self'; frame-ancestors 'self'; base-uri 'self'; form-action 'self'"
 
   <FilesMatch "^(index\\.html|sw\\.js|registerSW\\.js|manifest\\.webmanifest)$">
     Header set Cache-Control "no-cache, must-revalidate"

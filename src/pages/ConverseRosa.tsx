@@ -15,6 +15,7 @@ import {
   whatsappUrl,
   type ContactTopic,
 } from '../config/contact'
+import { track } from '../services/analytics'
 
 /** Botão que abre o WhatsApp com uma mensagem pronta. Só abre com clique; nada do app é enviado. */
 function WhatsAppButton({ topic, children, variant = 'primary' }: { topic: ContactTopic; children: ReactNode; variant?: 'primary' | 'secondary' }) {
@@ -28,6 +29,7 @@ function WhatsAppButton({ topic, children, variant = 'primary' }: { topic: Conta
       target="_blank"
       rel="noopener noreferrer"
       data-topic={topic}
+      onClick={() => track('whatsapp_button_clicked', { topic })}
       className={`inline-flex min-h-12 w-full items-center justify-center gap-2 rounded-full px-5 text-center font-semibold transition-colors ${cls}`}
     >
       <MessageCircle size={18} aria-hidden />

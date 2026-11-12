@@ -5,7 +5,9 @@ import { ButtonLink, Card, Notice, PageHeader, SectionTitle, Button } from '../c
 import { journeyById } from '../content/journeys'
 import { categoryById } from '../content/categories'
 import { buildStartPlan } from '../lib/recommend'
+import { QuizShareCard } from '../components/QuizShare'
 import { useApp } from '../services/store'
+import { track } from '../services/analytics'
 
 export default function Result() {
   const { prefs, ready, updatePrefs, saveJourney, journeys } = useApp()
@@ -60,6 +62,7 @@ export default function Result() {
         <Button
           className="mt-4"
           onClick={async () => {
+            if (!journeys[journey.id]) track('journey_started', { journey_id: journey.id })
             if (!journeys[journey.id]) await saveJourney({ journeyId: journey.id, startedAt: Date.now(), currentDay: 1, completedDays: [], skippedDays: [], updatedAt: Date.now() })
             navigate(`/trilhas/${journey.id}`)
           }}
@@ -80,6 +83,8 @@ export default function Result() {
           </div>
         </>
       )}
+
+      <QuizShareCard />
 
       <div className="mt-10 grid gap-3 sm:grid-cols-2">
         <ButtonLink to="/" size="lg">

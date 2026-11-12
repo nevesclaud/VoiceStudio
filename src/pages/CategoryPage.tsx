@@ -7,6 +7,7 @@ import { Button, ButtonLink, Card, categoryIcons, PageHeader, SectionTitle, Text
 import { categoryById } from '../content/categories'
 import { exerciseById } from '../content/exercises'
 import { useApp } from '../services/store'
+import { track } from '../services/analytics'
 
 export default function CategoryPage() {
   const { id = '' } = useParams()
@@ -16,6 +17,9 @@ export default function CategoryPage() {
   const [note, setNote] = useState(notes[id] ?? '')
   const [saved, setSaved] = useState(false)
   useEffect(() => setNote(notes[id] ?? ''), [id, notes])
+  useEffect(() => {
+    if (categoryById(id)) track('category_opened', { category_id: id })
+  }, [id])
 
   if (!cat) return <NotFound />
   const Icon = categoryIcons[cat.icon]!

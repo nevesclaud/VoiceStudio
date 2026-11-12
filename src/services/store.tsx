@@ -9,6 +9,7 @@ import type {
   UserPreferences,
 } from '../types'
 import * as storage from './db'
+import { configureAnalytics, track } from './analytics'
 
 export const defaultPrefs: UserPreferences = {
   name: '',
@@ -22,6 +23,10 @@ export const defaultPrefs: UserPreferences = {
   showSpirituality: false,
   favorites: [],
   recordingConsent: false,
+  shareStats: false,
+  statsAsked: false,
+  quizShared: false,
+  visitorId: '',
 }
 
 export const defaultSpeaking: SpeakingState = {
@@ -105,10 +110,15 @@ export function AppProvider({ children }: { children: ReactNode }) {
           storage.listAll('sessions'),
         ])])
         if (!alive) return
+        const mergedPrefs: UserPreferences = { ...defaultPrefs, ...prefs }
+        if (!mergedPrefs.visitorId) {
+          mergedPrefs.visitorId = storage.newId()
+          void storage.kvSet('prefs', mergedPrefs).catch(() => undefined)
+        }
         const loaded: AppState = {
           ready: true,
           persistent: true,
-          prefs: { ...defaultPrefs, ...prefs },
+          prefs: mergedPrefs,
           journeys: journeys ?? {},
           activeJourneyId: active ?? null,
           notes: notes ?? {},
@@ -123,7 +133,7 @@ export function AppProvider({ children }: { children: ReactNode }) {
       } catch {
         persistentRef.current = false
         if (alive) {
-          stateRef.current = { ...stateRef.current, ready: true, persistent: false }
+          stateRef.current = { ...stateRef.current, ready: true, persistent: false, prefs: { ...stateRef.current.prefs, visitorId: storage.newId() } }
           setState(stateRef.current)
         }
       }
@@ -232,10 +242,22 @@ export function AppProvider({ children }: { children: ReactNode }) {
       },
       async wipeAll() {
         await persist(() => storage.wipeAll())
-        commit(() => ({ ...initial, ready: true, persistent: persistentRef.current }))
+        // Novo identificador: nada do que vier depois se liga ao que foi apagado.
+        commit(() => ({ ...initial, ready: true, persistent: persistentRef.current, prefs: { ...defaultPrefs, visitorId: storage.newId() } }))
       },
     }
   }, [persist])
+
+  // Estatísticas: só com consentimento. Atualiza sempre que a escolha muda.
+  const openedRef = useRef(false)
+  useEffect(() => {
+    if (!state.ready) return
+    configureAnalytics({ consent: state.prefs.shareStats, visitorId: state.prefs.visitorId })
+    if (state.prefs.shareStats && !openedRef.current) {
+      openedRef.current = true
+      track('app_opened')
+    }
+  }, [state.ready, state.prefs.shareStats, state.prefs.visitorId])
 
   const value = useMemo(() => ({ ...state, ...actions }), [state, actions])
   // Nada é exibido antes de os dados locais carregarem: evita que um registro feito

@@ -24,6 +24,8 @@ ficam só no aparelho da pessoa.
 | Meu progresso | Resumo, gráfico semanal ou mensal dos check-ins (só aparece a partir de 3 registros), práticas mais usadas, diário (rápido em 30 s ou completo em 5 min, com filtros), lista de check-ins. |
 | INTEGRA | Perceber, Regular e Agir. Quatro caminhos opcionais (Emoções, Corpo, Mente, Valores e sentido), com micropráticas e reflexões. Espiritualidade só aparece se a pessoa ativar. |
 | Converse com a Rosa | Apresentação com foto, galeria (ampliar e navegar por teclado), consultas presencial (São Sebastião do Paraíso, MG) e online, valores (R$ 120,00 a consulta, R$ 500,00 o acompanhamento mensal), palestras e treinamentos, perguntas frequentes. Botões de WhatsApp com mensagem pronta para cada assunto. Fica fora da ajuda imediata e das práticas. |
+| Sua voz importa | Sugestão, dúvida, problema técnico ou elogio, com nome e e-mail opcionais, anti-spam e aviso de que não é atendimento. Vai para o Painel da Rosa. Requer Supabase. |
+| Painel da Rosa | `/painel`, só com login de administradora (verificado no banco). Visitantes, sessões, páginas, exercícios, áreas, jornadas, funil do quiz com abandono, cliques no WhatsApp, avaliações, respostas compartilhadas e mensagens com classificação. Filtros de período, gráfico, tabelas e exportação CSV/JSON. Requer Supabase. |
 | Perfil | Nome, forma de tratamento (feminino, masculino ou neutro), preferências (práticas curtas, sem respiração, menos animação, texto maior), favoritos, exportar dados, apagar tudo, instalar o app, Conheça a Rosa, Acesso, Privacidade, Limites. |
 
 ## O que depende de material ou aprovação da Rosa
@@ -67,7 +69,7 @@ Abra o endereço mostrado (termina em `/app/`).
 | `src/config/links.ts` | Instagram, página do trabalho da Rosa, contatos de emergência |
 | `src/config/commerce.ts` | Oferta (R$ 29,90, pagamento único), benefícios, checkout |
 | `src/config/contact.ts` | WhatsApp, mensagens prontas, valores das consultas, temas de palestras, perguntas frequentes, fotos |
-| `.env.local` | `VITE_CHECKOUT_URL=` (link real da Kiwify) e `VITE_BASE=` (padrão `/app/`) |
+| `.env.local` | `VITE_CHECKOUT_URL=` (link real da Kiwify), `VITE_BASE=` (padrão `/app/`), `VITE_SUPABASE_URL=` e `VITE_SUPABASE_ANON_KEY=` |
 | `public/brand/` | Arquivos de imagem. Para trocar, substitua mantendo o nome do arquivo |
 
 ### Conteúdo editável
@@ -80,6 +82,12 @@ retenção de ar e outras regras.
 
 Para texto com forma de tratamento, use `[[feminino|masculino|neutro]]`, por exemplo
 `Você está [[cansada|cansado|com cansaço]]?`.
+
+## Supabase (painel, mensagens e estatísticas)
+
+Opcional. Sem ele, o app funciona 100% local. Passo a passo e o que depende da Rosa em
+[`docs/SUPABASE.md`](docs/SUPABASE.md). Rascunho da política de privacidade em
+[`docs/POLITICA_PRIVACIDADE.md`](docs/POLITICA_PRIVACIDADE.md). Testes do banco: `npm run test:db`.
 
 ## Publicação no cPanel / TurboCloud
 

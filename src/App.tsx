@@ -26,6 +26,8 @@ import { ErrorBoundary } from './components/ErrorBoundary'
 const Integra = lazy(() => import('./pages/Integra'))
 const AboutRosa = lazy(() => import('./pages/AboutRosa'))
 const ConverseRosa = lazy(() => import('./pages/ConverseRosa'))
+const SuaVoz = lazy(() => import('./pages/SuaVoz'))
+const Painel = lazy(() => import('./pages/Painel'))
 const Access = lazy(() => import('./pages/Access'))
 const InfoPages = lazy(() => import('./pages/InfoPages'))
 const Speaking = lazy(() => import('./pages/speaking/Speaking'))
@@ -84,6 +86,8 @@ export function AppRoutes() {
           <Route path="/perfil" element={<Profile />} />
           <Route path="/rosa" element={<AboutRosa />} />
           <Route path="/converse-com-a-rosa" element={<ConverseRosa />} />
+          <Route path="/sua-voz" element={<SuaVoz />} />
+          <Route path="/painel" element={<Painel />} />
           <Route path="/acesso" element={<Access />} />
           <Route path="/privacidade" element={<InfoPages page="privacidade" />} />
           <Route path="/limites" element={<InfoPages page="limites" />} />

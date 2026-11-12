@@ -131,7 +131,7 @@ export default function Progress() {
 
           <div className="mt-8 rounded-2xl bg-bege-50 p-4">
             <p className="text-sm font-semibold">Seus dados são seus</p>
-            <p className="mt-1 text-sm text-muted">Tudo fica neste aparelho. Você pode exportar uma cópia ou apagar tudo em Perfil.</p>
+            <p className="mt-1 text-sm text-muted">Seu diário, check-ins e práticas ficam neste aparelho. Você pode exportar uma cópia ou apagar tudo em Perfil.</p>
             <Button
               variant="secondary"
               size="sm"

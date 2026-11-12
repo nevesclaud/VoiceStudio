@@ -5,6 +5,7 @@ import { Button, ButtonLink, Card, PageHeader, SectionTitle, useTx } from '../co
 import { journeyById } from '../content/journeys'
 import { exerciseById } from '../content/exercises'
 import { useApp } from '../services/store'
+import { track } from '../services/analytics'
 import type { JourneyProgress } from '../types'
 
 export default function JourneyDayPage() {
@@ -25,9 +26,11 @@ export default function JourneyDayPage() {
   }
 
   const mark = async (kind: 'feito' | 'pular') => {
+    if (!journeys[j.id]) track('journey_started', { journey_id: j.id })
     const completed = kind === 'feito' ? [...new Set([...p.completedDays, n])] : p.completedDays
     const skipped = kind === 'pular' ? [...new Set([...p.skippedDays, n])].filter((x) => !completed.includes(x)) : p.skippedDays.filter((x) => x !== n)
     const next = nextOpen(n, completed, skipped)
+    if (kind === 'feito' && completed.length === j.days && p.completedDays.length < j.days) track('journey_completed', { journey_id: j.id, total: j.days })
     await saveJourney({ ...p, completedDays: completed, skippedDays: skipped, currentDay: next, updatedAt: Date.now() })
     if (n < j.days) navigate(`/trilhas/${j.id}/dia/${next}`)
     else navigate(`/trilhas/${j.id}`)

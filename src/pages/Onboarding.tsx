@@ -1,9 +1,10 @@
 import { ChevronLeft, X } from 'lucide-react'
-import { useMemo, useState, type ReactNode } from 'react'
+import { useEffect, useMemo, useRef, useState, type ReactNode } from 'react'
 import { useNavigate } from 'react-router'
 import { Button, ChoiceList, Progress, Scale, TextInput, useTx } from '../components/ui'
 import { heardExplanation, interludes, questions } from '../content/onboarding'
 import { useApp } from '../services/store'
+import { track } from '../services/analytics'
 import type { OnboardingAnswers, Pillar, TextForm } from '../types'
 
 type Screen =
@@ -40,11 +41,27 @@ export default function Onboarding() {
   const [form, setForm] = useState<TextForm>(prefs.textForm)
   const [name, setName] = useState(prefs.name)
   const screen = screens[pos]!
+  const posRef = useRef(pos)
+  posRef.current = pos
 
-  const next = () => setPos((p) => Math.min(p + 1, screens.length - 1))
+  // Estatística anônima do funil: só o número e o tipo da etapa, nunca a resposta.
+  const stepKey = (s: Screen) => (s.kind === 'question' ? questions[s.index]!.key.replace(/[A-Z]/g, (c) => `-${c.toLowerCase()}`) : s.kind)
+  const trackStep = (at: number) => track('quiz_step_completed', { step: at + 1, step_key: stepKey(screens[at]!), total: screens.length })
+  const startedRef = useRef(false)
+  useEffect(() => {
+    if (startedRef.current) return
+    startedRef.current = true
+    track('quiz_started')
+  }, [])
+  const next = () => {
+    trackStep(pos)
+    setPos((p) => Math.min(p + 1, screens.length - 1))
+  }
   const back = () => (pos === 0 ? navigate(-1) : setPos((p) => p - 1))
 
   const finish = async () => {
+    trackStep(pos)
+    track('quiz_completed', { total: screens.length })
     const usual = answers.usualLevel
     await updatePrefs({
       answers,
@@ -120,7 +137,11 @@ export default function Onboarding() {
               else setAnswer({ [q.key]: v[0] } as Partial<OnboardingAnswers>)
               if (!q.multi) {
                 const at = pos
-                window.setTimeout(() => setPos((p) => (p === at ? Math.min(p + 1, screens.length - 1) : p)), 280)
+                window.setTimeout(() => {
+                  if (posRef.current !== at) return
+                  trackStep(at)
+                  setPos(Math.min(at + 1, screens.length - 1))
+                }, 280)
               }
             }}
           />

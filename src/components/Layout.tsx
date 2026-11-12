@@ -2,6 +2,7 @@ import { BookHeart, Compass, Home, LifeBuoy, MessageCircle, Sparkles, User } fro
 import { useEffect, useRef } from 'react'
 import { Link, NavLink, Outlet, useLocation } from 'react-router'
 import { useApp } from '../services/store'
+import { track } from '../services/analytics'
 import { Wordmark } from './Brand'
 
 const tabs = [
@@ -40,6 +41,7 @@ export function Layout() {
   useEffect(() => {
     window.scrollTo(0, 0)
     mainRef.current?.focus({ preventScroll: true })
+    track('page_viewed', {}, location.pathname)
   }, [location.pathname])
 
   useEffect(() => {
@@ -143,6 +145,7 @@ export function FocusLayout() {
   useEffect(() => {
     window.scrollTo(0, 0)
     mainRef.current?.focus({ preventScroll: true })
+    track('page_viewed', {}, location.pathname)
   }, [location.pathname])
   return (
     <main ref={mainRef} tabIndex={-1} className="mx-auto min-h-dvh w-full max-w-xl px-4 pt-[max(1.25rem,env(safe-area-inset-top))] pb-10 outline-none">

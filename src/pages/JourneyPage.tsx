@@ -5,6 +5,7 @@ import { Button, Card, PageHeader, Progress, useTx } from '../components/ui'
 import { journeyById } from '../content/journeys'
 import { exerciseById } from '../content/exercises'
 import { useApp } from '../services/store'
+import { track } from '../services/analytics'
 
 export default function JourneyPage() {
   const { id = '' } = useParams()
@@ -17,6 +18,7 @@ export default function JourneyPage() {
 
   const start = async () => {
     // O estado muda na hora; a gravação local segue em segundo plano.
+    if (!p) track('journey_started', { journey_id: j.id })
     if (!p) void saveJourney({ journeyId: j.id, startedAt: Date.now(), currentDay: 1, completedDays: [], skippedDays: [], updatedAt: Date.now() })
     else void setActiveJourney(j.id)
     navigate(`/trilhas/${j.id}/dia/${p ? Math.min(p.currentDay, j.days) : 1}`)

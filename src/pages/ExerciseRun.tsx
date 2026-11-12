@@ -1,5 +1,5 @@
 import { AlertTriangle, ChevronLeft, X } from 'lucide-react'
-import { useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { Link, useNavigate, useParams, useSearchParams } from 'react-router'
 import { CheckInForm } from '../components/common'
 import { StepPlayer } from '../components/StepPlayer'
@@ -9,6 +9,8 @@ import { eligible } from '../lib/recommend'
 import { useApp } from '../services/store'
 import type { PracticeSession } from '../types'
 import NotFound from './NotFound'
+import { track } from '../services/analytics'
+import { getRemote, isRemoteAvailable } from '../services/remote'
 
 type Phase = 'antes' | 'pratica' | 'avaliar' | 'parou' | 'fim'
 
@@ -26,12 +28,23 @@ export default function ExerciseRun() {
   const [note, setNote] = useState('')
   const [session, setSession] = useState<PracticeSession | null>(null)
   const startedAt = useRef(Date.now())
+  const [sendToRosa, setSendToRosa] = useState(false)
+  const [sendError, setSendError] = useState('')
+  const remoteOn = isRemoteAvailable()
+  const startedRef = useRef(false)
+  useEffect(() => {
+    if (phase === 'pratica' && !startedRef.current && ex) {
+      startedRef.current = true
+      track('exercise_started', { exercise_id: ex.id, source })
+    }
+  }, [phase, ex, source])
 
   if (!ex) return <NotFound />
 
   const back = params.get('trilha') ?? `/praticar/${ex.id}`
 
   const finish = async (status: PracticeSession['status']) => {
+    if (status === 'concluida') track('exercise_completed', { exercise_id: ex.id, source })
     const s = await addSession({ exerciseId: ex.id, startedAt: startedAt.current, endedAt: Date.now(), status, source })
     setSession(s)
     await setResume(null)
@@ -103,30 +116,64 @@ export default function ExerciseRun() {
             <p className="mt-1 text-muted">{toTx(ex.reflection) || 'O que mudou, mesmo que um pouquinho?'}</p>
           </div>
           <div>
-            <p className="label">Essa prática ajudou? (opcional)</p>
+            <p className="label">Esse exercício foi útil para você? (opcional)</p>
             <ChoiceList
-              label="Essa prática ajudou?"
+              label="Esse exercício foi útil para você?"
               value={usefulness ? [usefulness] : []}
               onChange={(v) => setUsefulness(v[0] as PracticeSession['usefulness'])}
               options={[
-                { label: 'Ajudou', value: 'ajudou' },
-                { label: 'Um pouco', value: 'um-pouco' },
-                { label: 'Não ajudou desta vez', value: 'nao-ajudou' },
+                { label: 'Sim, me ajudou', value: 'ajudou' },
+                { label: 'Ajudou um pouco', value: 'um-pouco' },
+                { label: 'Não foi útil para mim', value: 'nao-ajudou' },
               ]}
             />
           </div>
-          <TextArea label="Anotação (opcional)" value={note} onChange={setNote} placeholder="O que você percebeu?" />
+          <TextArea label="Comentário (opcional)" value={note} onChange={setNote} placeholder="O que você percebeu?" hint="Fica salvo só neste aparelho, a não ser que você marque a opção abaixo." />
+          {remoteOn && (usefulness || note.trim()) && (
+            <label className="flex items-start gap-3 rounded-2xl bg-bege-50 p-4 text-sm">
+              <input type="checkbox" className="mt-0.5 size-5 accent-[#3f6348]" checked={sendToRosa} onChange={(e) => setSendToRosa(e.target.checked)} />
+              <span>
+                Enviar esta avaliação{note.trim() ? ' e o comentário' : ''}, sem meu nome, para a Rosa melhorar as práticas. <span className="text-muted">Não envie dados pessoais no comentário.</span>
+              </span>
+            </label>
+          )}
+          {sendError && (
+            <p role="alert" className="text-sm text-rose-700">
+              {sendError}
+            </p>
+          )}
           <Button
             block
             size="lg"
             onClick={async () => {
               if (session) await updateSession({ ...session, usefulness, note: note.trim() || undefined })
+              // Avaliação remota: com a opção marcada (inclui comentário) ou, sem comentário, com as estatísticas ativas.
+              const shareRating = usefulness && (sendToRosa || prefs.shareStats)
+              if (shareRating && remoteOn) {
+                const remote = getRemote()!
+                const { error } = await remote.rpc('submit_exercise_feedback', {
+                  p_visitor: prefs.visitorId,
+                  p_exercise: ex.id,
+                  p_usefulness: usefulness,
+                  p_comment: sendToRosa ? note.trim().slice(0, 500) || null : null,
+                })
+                if (error && sendToRosa) {
+                  setSendError('Sua avaliação ficou salva no aparelho, mas não foi possível enviar agora.')
+                  return
+                }
+                track('exercise_feedback_submitted', { exercise_id: ex.id, usefulness })
+              }
               setPhase('fim')
             }}
           >
             Salvar e continuar
           </Button>
           {usefulness === 'nao-ajudou' && <p className="text-sm text-muted">Tudo bem. Nem todo exercício ajuda em todo momento. Vamos tentar outro quando quiser.</p>}
+          {sendError && (
+            <Button variant="ghost" block onClick={() => setPhase('fim')}>
+              Continuar sem enviar
+            </Button>
+          )}
         </section>
       )}
 

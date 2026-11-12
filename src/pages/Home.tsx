@@ -1,6 +1,7 @@
 import { ArrowRight, CloudSun, Heart, History, MessageCircle, Mic, PlayCircle, Route, Sparkles, Waves } from 'lucide-react'
 import { Link } from 'react-router'
 import { CheckInForm, ExerciseCard } from '../components/common'
+import { StatsConsentCard } from '../components/Consent'
 import { HelpButton } from '../components/Layout'
 import { ButtonLink, Card, EmptyState, Progress, SectionTitle } from '../components/ui'
 import { exerciseById } from '../content/exercises'
@@ -50,6 +51,8 @@ export default function Home() {
       <Card as="section" className="mt-4">
         <CheckInForm context="inicio" />
       </Card>
+
+      <StatsConsentCard />
 
       <div className="lg:hidden">
         <div className="mt-4 flex justify-center">
@@ -173,6 +176,12 @@ export default function Home() {
           Você pode começar com dois minutos.
         </EmptyState>
       )}
+      <p className="mt-10 text-center text-sm text-muted">
+        Tem uma ideia ou encontrou um problema?{' '}
+        <Link to="/sua-voz" className="font-medium text-azul-600 underline underline-offset-2">
+          Sua voz importa
+        </Link>
+      </p>
     </div>
   )
 }

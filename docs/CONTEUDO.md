@@ -37,6 +37,8 @@ Texto de "Conheça a Rosa": o texto-base da própria base de conhecimento, sem a
 | Nome do material | "Ansiedade: Mente, Corpo e Respiração" (escolhido em 12/11/2026). O quiz publicado continua como SOS Ansiedade | `src/config/commerce.ts` |
 | O que o material de R$ 29,90 entrega | Benefícios copiados da oferta já publicada no quiz. Confirmar se correspondem à entrega real (8 ou 12 técnicas, bônus) | `src/config/commerce.ts` |
 | Verificação de compra / área paga no app | Não existe. Precisa de backend com login e confirmação da Kiwify (webhook) | Ver `docs/ARQUITETURA.md` |
+| Supabase (painel, mensagens, estatísticas) | Código pronto e testado; falta criar o projeto e a conta da Rosa | `docs/SUPABASE.md` |
+| Política de privacidade | Rascunho pronto; falta revisão jurídica e dados da controladora | `docs/POLITICA_PRIVACIDADE.md` |
 | Contato e atendimentos | WhatsApp +55 35 99100-7594, consulta R$ 120,00, acompanhamento mensal R$ 500,00 (sem número de encontros), palestras sem preço público | `src/config/contact.ts` |
 | Áudios guiados | Não existem. O app usa só texto e animação | Adicionar só com áudio real e autorizado |
 | Validação das práticas | Ver a tabela abaixo | `src/content/exercises.ts` (`reviewStatus`, `autoRecommend`) |

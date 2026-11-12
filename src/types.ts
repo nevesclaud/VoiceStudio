@@ -164,6 +164,14 @@ export interface UserPreferences {
   showSpirituality: boolean
   favorites: string[]
   recordingConsent: boolean
+  /** Estatísticas anônimas de uso (opcional, desligado por padrão). */
+  shareStats: boolean
+  /** Já foi perguntado sobre as estatísticas (para não perguntar de novo). */
+  statsAsked: boolean
+  /** Respostas dos primeiros passos compartilhadas com a Rosa (opcional, revogável). */
+  quizShared: boolean
+  /** Identificador aleatório deste aparelho, usado só no que a pessoa escolher enviar. */
+  visitorId: string
 }
 
 export interface JourneyProgress {
